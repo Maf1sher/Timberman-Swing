@@ -20,6 +20,7 @@ public class GameUISwing implements GameUI{
     private final JPanel boardPanel;
     private final JPanel menuPanel;
     private final JPanel timbermanPanel;
+    private final JPanel scorePanel;
 
     private final int windowWidth = 800;
     private final int windowHeight = 800;
@@ -27,17 +28,21 @@ public class GameUISwing implements GameUI{
     private final MenuView menuView;
     private final BoardView boardView;
     private final TimbermanView timbermanView;
+    private final ScoreView scoreView;
 
     public GameUISwing(){
         mainPanel = new JPanel();
+        components = new ArrayList<>();
+
         menuView = new MenuView();
         boardView = new BoardView();
         timbermanView = new TimbermanView();
-        components = new ArrayList<>();
+        scoreView = new ScoreView();
 
         boardPanel = initialPanel();
         menuPanel = initialPanel();
         timbermanPanel = initialPanel();
+        scorePanel = initialPanel();
     }
 
     @Override
@@ -95,7 +100,8 @@ public class GameUISwing implements GameUI{
 
     @Override
     public void drawScore(int score) {
-
+        scoreView.draw(scorePanel, score);
+        components.add(scorePanel);
     }
 
     @Override
