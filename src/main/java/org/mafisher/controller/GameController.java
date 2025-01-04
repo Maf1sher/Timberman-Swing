@@ -37,7 +37,9 @@ public class GameController extends Game{
 
     private void gameLoop(){
         tick++;
-        calculateTime();
+        if(calculateTime())
+            refreshBoard();
+
         if(KeyController.isLeftPressed()){
             timberman.setLeftSide();
             cutLevel();
@@ -46,6 +48,7 @@ public class GameController extends Game{
         if(KeyController.isRightPressed()){
             timberman.setRightSide();
             cutLevel();
+
         }
 
         try {
@@ -53,8 +56,8 @@ public class GameController extends Game{
         }catch (InterruptedException e){
             e.printStackTrace();
         }
-        gameUI.drawTimer(timer);
-        gameUI.update();
+//        gameUI.drawTimer(timer);
+//        gameUI.update();
     }
 
     private String endGame() {
@@ -62,15 +65,15 @@ public class GameController extends Game{
         boolean isFinished = false;
 //        Terminal terminal = gameUI.getTerminal();
 
-        try {
+//        try {
 
 //            while (terminal.pollInput() != null) {
 //                // czyscimy buffor wcisnietych klawiszy
 //            }
 
-            while (!isFinished) {
+//            while (!isFinished) {
                 gameUI.drwaGameOver( score, nickBuilder.toString());
-                gameUI.update();
+                refreshBoard();
 
 //                KeyStroke keyStroke = terminal.pollInput();
 //                if (keyStroke != null) {
@@ -91,11 +94,11 @@ public class GameController extends Game{
 //                    }
 //                }
 
-                Thread.sleep(50);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//                Thread.sleep(50);
+//            }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         return nickBuilder.toString();
     }
 

@@ -22,11 +22,13 @@ public class Game {
     }
 
 
-    protected void calculateTime(){
+    protected boolean calculateTime(){
         if(tick == 20){
             timer -= score / 100 + 1;
             tick = 0;
+            return true;
         }
+        return false;
     }
 
     protected TupleBoolean generateLevel(){

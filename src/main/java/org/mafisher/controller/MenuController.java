@@ -21,13 +21,9 @@ public class MenuController {
     }
 
     public void run() {
-        new Thread(gameUI::initial).start();
-
+        gameUI.initial();
+        repaint();
         while (menuRunning) {
-            gameUI.drawBackground();
-            gameUI.drawMenu(selectedOption);
-            gameUI.update();
-
             if (KeyController.isEnternProcessed()) {
                 switch (selectedOption) {
                     case 0:
@@ -47,10 +43,17 @@ public class MenuController {
                         ScoreBoardController.saveScoreBoard();
                         break;
                 }
+                repaint();
             }
 
             handleNavigation();
         }
+    }
+
+    private void repaint(){
+        gameUI.drawBackground();
+        gameUI.drawMenu(selectedOption);
+        gameUI.update();
     }
 
     private void handleNavigation() {
@@ -58,12 +61,14 @@ public class MenuController {
             if (selectedOption < 3) {
                 selectedOption++;
             }
+            repaint();
         }
 
         if (KeyController.isUpProcessed()) {
             if (selectedOption > 0) {
                 selectedOption--;
             }
+            repaint();
         }
     }
 }
