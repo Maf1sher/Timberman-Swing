@@ -61,45 +61,22 @@ public class GameController extends Game{
     }
 
     private String endGame() {
-        StringBuilder nickBuilder = new StringBuilder();
-        boolean isFinished = false;
-//        Terminal terminal = gameUI.getTerminal();
+        StringBuilder nick = new StringBuilder();
 
-//        try {
+        nick.setLength(0);
 
-//            while (terminal.pollInput() != null) {
-//                // czyscimy buffor wcisnietych klawiszy
-//            }
+        gameUI.drwaGameOver(score, nick);
+        refreshBoard();
 
-//            while (!isFinished) {
-                gameUI.drwaGameOver( score, nickBuilder.toString());
-                refreshBoard();
-
-//                KeyStroke keyStroke = terminal.pollInput();
-//                if (keyStroke != null) {
-//                    switch (keyStroke.getKeyType()) {
-//                        case Enter:
-//                            if (!nickBuilder.isEmpty()) {
-//                                isFinished = true;
-//                            }
-//                            break;
-//                        case Backspace:
-//                            if (!nickBuilder.isEmpty()) {
-//                                nickBuilder.deleteCharAt(nickBuilder.length() - 1);
-//                            }
-//                            break;
-//                        case Character:
-//                            nickBuilder.append(keyStroke.getCharacter());
-//                            break;
-//                    }
-//                }
-
-//                Thread.sleep(50);
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        return nickBuilder.toString();
+        while (nick.length() == 0) {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(nick);
+        return nick.toString();
     }
 
     private void cutLevel(){

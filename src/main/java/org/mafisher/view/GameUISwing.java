@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class GameUISwing implements GameUI{
 
@@ -22,6 +23,7 @@ public class GameUISwing implements GameUI{
     private final JPanel timbermanPanel;
     private final JPanel scorePanel;
     private final JPanel timerPanel;
+    private final JPanel gameOverPanel;
 
     private final int windowWidth = 800;
     private final int windowHeight = 800;
@@ -30,6 +32,7 @@ public class GameUISwing implements GameUI{
     private final BoardView boardView;
     private final TimbermanView timbermanView;
     private final ScoreView scoreView;
+    private final GameOverView gameOverView;
     private final TimerView timerView;
 
     public GameUISwing(){
@@ -41,11 +44,13 @@ public class GameUISwing implements GameUI{
         timbermanView = new TimbermanView();
         scoreView = new ScoreView();
         timerView = new TimerView();
+        gameOverView = new GameOverView();
 
         boardPanel = initialPanel();
         menuPanel = initialPanel();
         timbermanPanel = initialPanel();
         scorePanel = initialPanel();
+        gameOverPanel = initialPanel();
         timerPanel = initialPanel();
     }
 
@@ -109,8 +114,9 @@ public class GameUISwing implements GameUI{
     }
 
     @Override
-    public void drwaGameOver(int score, String nick) {
-
+    public void drwaGameOver(int score, StringBuilder nick) {
+        gameOverView.draw(gameOverPanel, score, nick);
+        components.add(gameOverPanel);
     }
 
     @Override

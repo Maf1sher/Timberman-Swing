@@ -5,7 +5,9 @@ import org.mafisher.model.Board;
 import org.mafisher.model.GameResult;
 import org.mafisher.model.Timberman;
 
+import javax.swing.*;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public interface GameUI {
     void initial();
@@ -16,7 +18,7 @@ public interface GameUI {
     void drawBoard(Board board);
     void drawTimberman(Timberman timberman);
     void drawScore(int score);
-    void drwaGameOver(int score, String nick);
+    void drwaGameOver(int score, StringBuilder nick);
     void drawTimer(int time);
     void drawScoreboard(List<GameResult> scoreboard);
     void drawColorMenu(int selectedColorIndex, RGBColorEnums[] colors);
