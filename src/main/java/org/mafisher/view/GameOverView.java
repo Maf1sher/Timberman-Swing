@@ -18,8 +18,8 @@ public class GameOverView {
     }
 
     public void draw(JPanel gameOverPanel, int score, StringBuilder nick) {
-        input.setText("");  // Clear the input field
-        input.setFocusable(true);  // Ensure input is focused
+        input.setText("");
+        input.setFocusable(true);
 
         double panelWidth = gameOverPanel.getWidth();
         double panelHeight = gameOverPanel.getHeight();
@@ -52,43 +52,27 @@ public class GameOverView {
         gameOverPanel.revalidate();
         gameOverPanel.repaint();
 
-        input.requestFocus();  // Ensure focus is set on the input field
+        input.requestFocus();
 
-        // Add ActionListener for Enter key submission
+        for (java.awt.event.ActionListener listener : input.getActionListeners()) {
+            input.removeActionListener(listener);
+        }
+
         input.addActionListener(e -> {
-            // Submit the nickname when Enter is pressed
             nick.append(input.getText());
-
             SwingUtilities.invokeLater(() -> {
-                // Once nickname is submitted, clean up and transition
                 removeInputListeners(gameOverPanel);
-                proceedAfterSubmission(gameOverPanel, nick);
             });
         });
     }
 
     private void removeInputListeners(JPanel gameOverPanel) {
-        input.setFocusable(false);  // Disable input temporarily
+        input.setFocusable(false);
         for (java.awt.event.ActionListener listener : input.getActionListeners()) {
             input.removeActionListener(listener);
         }
-
         gameOverPanel.removeAll();
         gameOverPanel.revalidate();
         gameOverPanel.repaint();
-    }
-
-    private void proceedAfterSubmission(JPanel gameOverPanel, StringBuilder nick) {
-        // Here we handle the transition to the next screen or action
-        System.out.println("Nickname submitted: " + nick.toString());
-
-        // Clear the gameOverPanel to remove all game over related components
-        gameOverPanel.removeAll();
-        gameOverPanel.revalidate();
-        gameOverPanel.repaint();
-
-        // Call the function that transitions to the main menu or restarts the game
-        // For example, if this triggers the main menu, we call a method like:
-        // gameUI.showMainMenu();  // Make sure this is implemented in your gameUI class.
     }
 }
