@@ -22,6 +22,7 @@ public class GameUISwing implements GameUI{
     private final JPanel timbermanPanel;
     private final JPanel scorePanel;
     private final JPanel timerPanel;
+    private final JPanel scoreboardPanel;
 
     private final int windowWidth = 800;
     private final int windowHeight = 800;
@@ -31,6 +32,7 @@ public class GameUISwing implements GameUI{
     private final TimbermanView timbermanView;
     private final ScoreView scoreView;
     private final TimerView timerView;
+    private final ScoreboardView scoreboardView;
 
     public GameUISwing(){
         mainPanel = new JPanel();
@@ -41,12 +43,14 @@ public class GameUISwing implements GameUI{
         timbermanView = new TimbermanView();
         scoreView = new ScoreView();
         timerView = new TimerView();
+        scoreboardView = new ScoreboardView();
 
         boardPanel = initialPanel();
         menuPanel = initialPanel();
         timbermanPanel = initialPanel();
         scorePanel = initialPanel();
         timerPanel = initialPanel();
+        scoreboardPanel = initialPanel();
     }
 
     @Override
@@ -121,7 +125,8 @@ public class GameUISwing implements GameUI{
 
     @Override
     public void drawScoreboard(List<GameResult> scoreboard) {
-
+        scoreboardView.draw(scoreboardPanel, scoreboard);
+        components.add(scoreboardPanel);
     }
 
     @Override
