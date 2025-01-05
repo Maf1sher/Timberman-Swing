@@ -114,9 +114,9 @@ public class GameController extends Game{
     private void refreshBoard(){
         gameUI.drawBackground();
         gameUI.drawScore(score);
+        gameUI.drawTimer(timer);
         gameUI.drawBoard(board);
         gameUI.drawTimberman(timberman);
-        gameUI.drawTimer(timer);
         gameUI.update();
     }
 

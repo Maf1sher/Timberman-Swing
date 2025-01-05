@@ -10,7 +10,7 @@ public class TimbermanView {
     private final JLabel label;
 
     public TimbermanView() {
-        timbermanIcon = new ImageIcon(getClass().getResource("/view/amongus.png"));
+        timbermanIcon = new ImageIcon(getClass().getResource("/view/timberman/amongus.png"));
         label = new JLabel(timbermanIcon);
     }
 

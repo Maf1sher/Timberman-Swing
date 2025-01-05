@@ -21,9 +21,9 @@ public class BoardView {
 
 
     public BoardView() {
-        leftBranch = new ImageIcon(this.getClass().getResource("/view/left-branch.png")).getImage();
-        rightBranch = new ImageIcon(this.getClass().getResource("/view/right-branch.png")).getImage();
-        middleBranch = new ImageIcon(this.getClass().getResource("/view/middle-branch.png")).getImage();
+        leftBranch = new ImageIcon(this.getClass().getResource("/view/tree/left-branch.png")).getImage();
+        rightBranch = new ImageIcon(this.getClass().getResource("/view/tree/right-branch.png")).getImage();
+        middleBranch = new ImageIcon(this.getClass().getResource("/view/tree/middle-branch.png")).getImage();
         tree = new ArrayList<>();
         for (int i = 0; i < 11; i++) {
             tree.add(new JLabel());

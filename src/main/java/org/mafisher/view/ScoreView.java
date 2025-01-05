@@ -15,7 +15,7 @@ public class ScoreView {
         scoreboardPanel.removeAll();
         double panelWidth = scoreboardPanel.getWidth();
 
-        label.setLocation((int)(panelWidth/2 - 50), 150);
+        label.setLocation((int)(panelWidth/2 - 50), 200);
         label.setText(String.valueOf(score));
         label.setSize(100,40);
         label.setHorizontalAlignment(JLabel.CENTER);

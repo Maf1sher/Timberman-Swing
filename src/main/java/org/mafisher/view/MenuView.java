@@ -1,7 +1,6 @@
 package org.mafisher.view;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MenuView {
     public void draw(JPanel panel, int selectedOptions){
