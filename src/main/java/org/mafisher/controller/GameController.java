@@ -74,14 +74,14 @@ public class GameController extends Game{
                 }
             }
 
-            if (currentKey != null && !currentKey.equals("") && !currentKey.equals("ENTER")) {
-                nick.append(currentKey.trim());
+            if (currentKey != null && !currentKey.isEmpty() && !currentKey.equals("ENTER") && !KeyController.isBackspacePressed()) {
+                nick.append(currentKey);
             }
 
             gameUI.drwaGameOver(score, nick);
 
             try {
-                Thread.sleep(80);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

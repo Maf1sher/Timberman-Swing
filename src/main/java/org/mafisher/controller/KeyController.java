@@ -129,10 +129,17 @@ public class KeyController implements KeyListener {
     }
 
     public static String getCurrentKeyPressed() {
-        return currentKey;
+        String tempKey = currentKey;
+        currentKey = "";
+        keyProcessed = false;
+        return tempKey;
     }
 
     public static boolean isBackspacePressed() {
-        return backspacePressed;
+        if (backspacePressed && !backspaceProcessed) {
+            backspaceProcessed = true;
+            return true;
+        }
+        return false;
     }
 }
