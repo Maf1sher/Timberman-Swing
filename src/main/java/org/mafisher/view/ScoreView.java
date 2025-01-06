@@ -3,7 +3,7 @@ package org.mafisher.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ScoreView {
+public class ScoreView extends JPanel{
 
     private final JLabel label;
 
@@ -11,9 +11,9 @@ public class ScoreView {
         label = new JLabel();
     }
 
-    public void draw(JPanel scoreboardPanel, int score) {
-        scoreboardPanel.removeAll();
-        double panelWidth = scoreboardPanel.getWidth();
+    public void draw(int score) {
+        this.removeAll();
+        double panelWidth = this.getWidth();
 
         label.setLocation((int)(panelWidth/2 - 50), 200);
         label.setText(String.valueOf(score));
@@ -22,6 +22,6 @@ public class ScoreView {
         label.setFont(new Font("Arial", Font.PLAIN, 40));
         label.setForeground(Color.WHITE);
 
-        scoreboardPanel.add(label);
+        this.add(label);
     }
 }

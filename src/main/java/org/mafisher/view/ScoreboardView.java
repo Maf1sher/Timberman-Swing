@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.List;
 
 
-public class ScoreboardView {
+public class ScoreboardView extends JPanel{
 
     private final JLabel scoreboardBackground;
     private final ImageIcon scoreboardIcon;
@@ -18,11 +18,11 @@ public class ScoreboardView {
         scoreboardBackground = new JLabel(scoreboardIcon);
     }
 
-    public void draw(JPanel panel, List<GameResult> scoreboard) {
-        panel.removeAll();
+    public void draw(List<GameResult> scoreboard) {
+        this.removeAll();
 
-        int x = panel.getWidth() / 2 - scoreboardIcon.getIconWidth() / 2;
-        int y = panel.getHeight() / 2 - scoreboardIcon.getIconHeight() / 2;
+        int x = this.getWidth() / 2 - scoreboardIcon.getIconWidth() / 2;
+        int y = this.getHeight() / 2 - scoreboardIcon.getIconHeight() / 2;
 
         int i = 1;
 
@@ -33,14 +33,14 @@ public class ScoreboardView {
             JLabel label = new JLabel();
             label.setText(i + ": " + result.getPlayerNick() + " - " + result.getScore());
             label.setSize(300, 40);
-            label.setLocation(panel.getWidth() / 2 - label.getWidth() / 2, 250 + i * 30);
+            label.setLocation(this.getWidth() / 2 - label.getWidth() / 2, 250 + i * 30);
             label.setHorizontalAlignment(JLabel.LEFT);
             label.setFont(new Font("Arial", Font.PLAIN, 20));
             label.setForeground(Color.WHITE);
-            panel.add(label);
+            this.add(label);
             i++;
         }
 
-        panel.add(scoreboardBackground);
+        this.add(scoreboardBackground);
     }
 }

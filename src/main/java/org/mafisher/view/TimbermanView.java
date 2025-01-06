@@ -19,28 +19,22 @@ public class TimbermanView extends JPanel implements ActionListener {
 
     private boolean side;
 
-    private final int panelWidth;
-    private final int panelHeight;
+    private int panelWidth;
+    private int panelHeight;
 
     public TimbermanView() {
-
-        this.setSize(800, 800);
-        this.setLayout(null);
-        this.setOpaque(false);
-
         timberman_right = new ImageIcon(getClass().getResource("/view/timberman/timberman_right.png")).getImage();
         timberman_left = new ImageIcon(getClass().getResource("/view/timberman/timberman_left.png")).getImage();
         timberman_right_animation = new ImageIcon(getClass().getResource("/view/timberman/timberman_right_animation.png")).getImage();
         timberman_left_animation = new ImageIcon(getClass().getResource("/view/timberman/timberman_left_animation.png")).getImage();
-
-        panelWidth = this.getWidth();
-        panelHeight = this.getHeight();
 
         timer = new Timer(200, this);
 
     }
 
     public void draw(Timberman timberman){
+        panelWidth = this.getWidth();
+        panelHeight = this.getHeight();
         boolean side = timberman.getSide();
         if(side){
             this.side = true;

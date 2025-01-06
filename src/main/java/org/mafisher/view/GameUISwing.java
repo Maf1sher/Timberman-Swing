@@ -10,20 +10,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 public class GameUISwing implements GameUI{
 
     private JFrame frame;
     private final JPanel mainPanel;
     private final List<JComponent> components;
-
-    private final JPanel menuPanel;
-    private final JPanel scorePanel;
-    private final JPanel timerPanel;
-    private final JPanel gameOverPanel;
-    private final JPanel scoreboardPanel;
-    private final JPanel colorMenuPanel;
 
     private final int windowWidth = 800;
     private final int windowHeight = 800;
@@ -50,12 +42,14 @@ public class GameUISwing implements GameUI{
         scoreboardView = new ScoreboardView();
         colorMenuView = new ColorMenuView();
 
-        menuPanel = initialPanel();
-        scorePanel = initialPanel();
-        gameOverPanel = initialPanel();
-        timerPanel = initialPanel();
-        scoreboardPanel = initialPanel();
-        colorMenuPanel = initialPanel();
+        initialView(timbermanView);
+        initialView(boardView);
+        initialView(gameOverView);
+        initialView(menuView);
+        initialView(scoreView);
+        initialView(timerView);
+        initialView(scoreboardView);
+        initialView(colorMenuView);
     }
 
     @Override
@@ -67,6 +61,7 @@ public class GameUISwing implements GameUI{
         frame.setTitle("Timberman");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(windowWidth, windowHeight);
+        frame.setResizable(false);
         frame.setVisible(true);
         frame.add(mainPanel);
         frame.addKeyListener(new KeyController());
@@ -90,8 +85,8 @@ public class GameUISwing implements GameUI{
 
     @Override
     public void drawMenu(int selectedOption) {
-        menuView.draw(menuPanel, selectedOption);
-        components.add(menuPanel);
+        menuView.draw(selectedOption);
+        components.add(menuView);
     }
 
     @Override
@@ -113,40 +108,38 @@ public class GameUISwing implements GameUI{
 
     @Override
     public void drawScore(int score) {
-        scoreView.draw(scorePanel, score);
-        components.add(scorePanel);
+        scoreView.draw(score);
+        components.add(scoreView);
     }
 
     @Override
     public void drwaGameOver(int score, StringBuilder nick) {
-        gameOverView.draw(gameOverPanel, score, nick);
-        components.add(gameOverPanel);
+        gameOverView.draw(score, nick);
+        components.add(gameOverView);
     }
 
     @Override
     public void drawTimer(int time) {
-        timerView.draw(timerPanel, time);
-        components.add(timerPanel);
+        timerView.draw(time);
+        components.add(timerView);
     }
 
     @Override
     public void drawScoreboard(List<GameResult> scoreboard) {
-        scoreboardView.draw(scoreboardPanel, scoreboard);
-        components.add(scoreboardPanel);
+        scoreboardView.draw(scoreboard);
+        components.add(scoreboardView);
     }
 
     @Override
     public void drawColorMenu(int selectedColorIndex, RGBColorEnums[] colors) {
-        colorMenuView.draw(colorMenuPanel, selectedColorIndex, colors);
-        components.add(colorMenuPanel);
+        colorMenuView.draw(selectedColorIndex, colors);
+        components.add(colorMenuView);
 
     }
 
-    private JPanel initialPanel(){
-        JPanel panel = new JPanel();
+    private void initialView(JPanel panel){
         panel.setSize(windowWidth, windowHeight);
         panel.setLayout(null);
         panel.setOpaque(false);
-        return panel;
     }
 }

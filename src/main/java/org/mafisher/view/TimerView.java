@@ -2,7 +2,7 @@ package org.mafisher.view;
 
 import javax.swing.*;
 
-public class TimerView {
+public class TimerView extends JPanel{
 
     private final ImageIcon timerBar;
     private final ImageIcon timerFrame;
@@ -22,10 +22,10 @@ public class TimerView {
         timerBackgroundLabel = new JLabel(timerBackground);
     }
 
-    public void draw(JPanel panel, int time) {
-        panel.removeAll();
+    public void draw(int time) {
+        this.removeAll();
 
-        int x = panel.getWidth() / 2 - timerBar.getIconWidth() / 2;
+        int x = this.getWidth() / 2 - timerBar.getIconWidth() / 2;
         int y = 75;
 
 
@@ -42,8 +42,8 @@ public class TimerView {
         timerBarLabel.setSize((int)(width * (time / 100.0)), height);
         timerBackgroundLabel.setSize(width, height);
 
-        panel.add(timerFrameLabel);
-        panel.add(timerBarLabel);
-        panel.add(timerBackgroundLabel);
+        this.add(timerFrameLabel);
+        this.add(timerBarLabel);
+        this.add(timerBackgroundLabel);
     }
 }

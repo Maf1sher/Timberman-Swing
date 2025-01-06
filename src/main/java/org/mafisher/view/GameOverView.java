@@ -1,16 +1,17 @@
 package org.mafisher.view;
 
-import org.mafisher.controller.KeyController;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class GameOverView {
+public class GameOverView extends JPanel{
 
     private final ImageIcon gameOverIcon;
     private final JLabel label;
     private final JLabel scoreLabel;
     private final JLabel nickLabel;
+
+    private int panelWidth;
+    private int panelHeight;
 
     public GameOverView() {
         this.gameOverIcon = new ImageIcon(getClass().getResource("/view/gameover/gameover.png"));
@@ -19,13 +20,11 @@ public class GameOverView {
         this.nickLabel = new JLabel();
     }
 
-    public void draw(JPanel gameOverPanel, int score, StringBuilder nick) {
+    public void draw(int score, StringBuilder nick) {
+        panelWidth = this.getWidth();
+        panelHeight = this.getHeight();
 
-        gameOverPanel.removeAll();
-        double panelWidth = gameOverPanel.getWidth();
-        double panelHeight = gameOverPanel.getHeight();
-
-        label.setBounds((int) (panelWidth / 2 - 190), (int) (panelHeight / 2 - 250), 380, 369);
+        label.setBounds(panelWidth / 2 - 190, panelHeight / 2 - 250, 380, 369);
 
         scoreLabel.setText(String.valueOf(score));
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 40));
@@ -46,15 +45,11 @@ public class GameOverView {
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
 
+        this.add(scoreLabel);
+        this.add(nickLabel);
+        this.add(label);
 
-        gameOverPanel.add(scoreLabel);
-        gameOverPanel.add(nickLabel);
-
-        gameOverPanel.add(label);
-
-        gameOverPanel.revalidate();
-        gameOverPanel.repaint();
-
+        this.revalidate();
+        this.repaint();
     }
-
 }

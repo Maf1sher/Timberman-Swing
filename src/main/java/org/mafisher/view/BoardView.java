@@ -20,21 +20,14 @@ public class BoardView extends JPanel{
 
 
     public BoardView() {
-
-        this.setSize(800, 800);
-        this.setLayout(null);
-        this.setOpaque(false);
-
-        panelWidth = this.getWidth();
-        panelHeight = this.getHeight();
-
         leftBranch = new ImageIcon(this.getClass().getResource("/view/tree/left-branch.png")).getImage();
         rightBranch = new ImageIcon(this.getClass().getResource("/view/tree/right-branch.png")).getImage();
         middleBranch = new ImageIcon(this.getClass().getResource("/view/tree/middle-branch.png")).getImage();
-
     }
 
     public void draw(Board board){
+        panelWidth = this.getWidth();
+        panelHeight = this.getHeight();
         tree = board.getTree();
         revalidate();
         repaint();
