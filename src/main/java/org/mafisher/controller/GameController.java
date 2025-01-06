@@ -62,20 +62,32 @@ public class GameController extends Game{
 
     private String endGame() {
         StringBuilder nick = new StringBuilder();
-
-        nick.setLength(0);
-
         gameUI.drwaGameOver(score, nick);
         refreshBoard();
 
-        while (nick.length() == 0) {
+        while (!KeyController.isEnternProcessed()) {
+            String currentKey = KeyController.getCurrentKeyPressed();
+
+            if (KeyController.isBackspacePressed()) {
+                if (nick.length() > 0) {
+                    nick.deleteCharAt(nick.length() - 1);
+                }
+            }
+
+            if (currentKey != null && !currentKey.equals("") && !currentKey.equals("ENTER")) {
+                nick.append(currentKey.trim());
+            }
+
+            gameUI.drwaGameOver(score, nick);
+
             try {
-                Thread.sleep(50);
+                Thread.sleep(80);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(nick);
+        refreshBoard();
+//        System.out.println(nick);
         return nick.toString();
     }
 

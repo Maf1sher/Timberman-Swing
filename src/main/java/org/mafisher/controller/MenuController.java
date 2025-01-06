@@ -29,7 +29,7 @@ public class MenuController {
                     case 0:
                         GameResult result = gameController.startGame();
                         ScoreBoardController.addScore(result);
-                        while(!KeyController.isEnternProcessed());
+//                        while(!KeyController.isEnternProcessed());
                         break;
                     case 1:
                         ScoreBoardController.showScoreBoard(gameUI);

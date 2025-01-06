@@ -17,6 +17,11 @@ public class KeyController implements KeyListener {
     private static volatile boolean downProcessed = false;
     private static volatile boolean enterProcessed = false;
 
+    private static volatile boolean backspacePressed = false;
+    private static volatile boolean backspaceProcessed = false;
+    private static volatile String currentKey = "";
+    private static volatile boolean keyProcessed = false;
+
     public static boolean isLeftPressed() {
         if (leftPressed && !leftProcessed) {
             leftProcessed = true;
@@ -60,7 +65,11 @@ public class KeyController implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        char keyChar = e.getKeyChar();
 
+        if (Character.isLetterOrDigit(keyChar) || Character.isWhitespace(keyChar)) {
+            currentKey = String.valueOf(keyChar);
+        }
     }
 
     @Override
@@ -71,6 +80,16 @@ public class KeyController implements KeyListener {
             case KeyEvent.VK_UP -> upPressed = true;
             case KeyEvent.VK_DOWN -> downPressed = true;
             case KeyEvent.VK_ENTER -> enterPressed = true;
+            case KeyEvent.VK_BACK_SPACE -> backspacePressed = true;
+            default -> {
+                if (!keyProcessed) {
+                    char keyChar = e.getKeyChar();
+                    if (Character.isLetterOrDigit(keyChar)) {
+                        currentKey = String.valueOf(keyChar);
+                        keyProcessed = true;
+                    }
+                }
+            }
         }
     }
 
@@ -97,6 +116,23 @@ public class KeyController implements KeyListener {
                 enterPressed = false;
                 enterProcessed = false;
             }
+            case KeyEvent.VK_BACK_SPACE -> {
+                backspacePressed = false;
+                backspaceProcessed = false;
+            }
+            default -> {
+                currentKey = "";
+                keyProcessed = false;
+            }
         }
+
+    }
+
+    public static String getCurrentKeyPressed() {
+        return currentKey;
+    }
+
+    public static boolean isBackspacePressed() {
+        return backspacePressed;
     }
 }
