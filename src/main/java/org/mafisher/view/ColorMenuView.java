@@ -38,7 +38,7 @@ public class ColorMenuView extends JPanel{
         timberman.setLocation(timbermanX, timbermanY);
         timberman.setSize(timberman_image.getIconWidth(), timberman_image.getIconHeight());
 
-        int colorY = y + background_image.getIconHeight() - 100;
+        int colorY = y + background_image.getIconHeight() - 150;
         int colorWidth = 50;
         int colorHeight = 50;
         int spacing = 10;
