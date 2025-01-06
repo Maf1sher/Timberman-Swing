@@ -65,7 +65,7 @@ public class GameController extends Game{
         gameUI.drwaGameOver(score, nick);
         refreshBoard();
 
-        while (!KeyController.isEnternProcessed()) {
+        while (!KeyController.isEnternProcessed()  || nick.length() < 3) {
             String currentKey = KeyController.getCurrentKeyPressed();
 
             if (KeyController.isBackspacePressed()) {
@@ -87,7 +87,6 @@ public class GameController extends Game{
             }
         }
         refreshBoard();
-//        System.out.println(nick);
         return nick.toString();
     }
 

@@ -21,6 +21,12 @@ public class TimbermanColorController {
             gameUI.drawColorMenu(selectedColorIndex, colors);
             gameUI.update();
 
+            try {
+                Thread.sleep(80);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             if (KeyController.isLeftPressed()) {
                 selectedColorIndex = (selectedColorIndex - 1 + colors.length) % colors.length;
             }
