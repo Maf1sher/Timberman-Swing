@@ -103,8 +103,8 @@ public class GameController extends Game{
         gameUI.drawBackground();
         gameUI.drawScore(score);
         gameUI.drawTimer(timer);
-        gameUI.drawBoard(board);
         gameUI.drawTimberman(timberman);
+        gameUI.drawBoard(board);
         gameUI.update();
     }
 

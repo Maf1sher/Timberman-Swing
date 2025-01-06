@@ -5,72 +5,68 @@ import org.mafisher.model.TupleBoolean;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class BoardView {
+public class BoardView extends JPanel{
 
     private final Image leftBranch;
     private final Image rightBranch;
     private final Image middleBranch;
 
-    private final List<JLabel> tree;
+    private List<TupleBoolean> tree;
 
     private int panelWidth;
     private int panelHeight;
 
 
     public BoardView() {
+
+        this.setSize(800, 800);
+        this.setLayout(null);
+        this.setOpaque(false);
+
+        panelWidth = this.getWidth();
+        panelHeight = this.getHeight();
+
         leftBranch = new ImageIcon(this.getClass().getResource("/view/tree/left-branch.png")).getImage();
         rightBranch = new ImageIcon(this.getClass().getResource("/view/tree/right-branch.png")).getImage();
         middleBranch = new ImageIcon(this.getClass().getResource("/view/tree/middle-branch.png")).getImage();
-        tree = new ArrayList<>();
-        for (int i = 0; i < 11; i++) {
-            tree.add(new JLabel());
-        }
+
     }
 
-    public void draw(JPanel panel, Board board){
-        panelWidth = panel.getWidth();
-        panelHeight = panel.getHeight();
-
-        for (JLabel label : tree){
-            panel.remove(label);
-        }
-
-        List<TupleBoolean> list = board.getTree();
-        for (int i = 0; i < list.size(); i++) {
-            if(!list.get(i).getValue1() && !list.get(i).getValue2())
-                drawTrunk(tree.get(i), i);
-            else if(list.get(i).getValue1())
-                drawBranch(tree.get(i), 0, i, false);
-            else if(list.get(i).getValue2())
-                drawBranch(tree.get(i), 2, i, true);
-
-        }
-
-        for (JLabel label : tree){
-            panel.add(label);
-        }
+    public void draw(Board board){
+        tree = board.getTree();
+        revalidate();
+        repaint();
     }
 
-    private void drawTrunk(JLabel label, int col){
-        ImageIcon icon = new ImageIcon(middleBranch);
-        label.setIcon(icon);
-        label.setLocation(panelWidth / 2 - icon.getIconWidth() / 2, panelHeight - 200 - col * icon.getIconHeight());
-        label.setSize(icon.getIconWidth(), icon.getIconHeight());
-    }
+    @Override
+    public void paint(Graphics g){
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
+        for (int i = 0; i < tree.size(); i++) {
+            if(!tree.get(i).getValue1() && !tree.get(i).getValue2())
+                g2d.drawImage(
+                        middleBranch,
+                        panelWidth / 2 - middleBranch.getWidth(null) / 2,
+                        panelHeight - 200 - i * middleBranch.getHeight(null),
+                        null
+                );
+            else if(tree.get(i).getValue1())
+                g2d.drawImage(
+                        leftBranch,
+                        panelWidth / 2 - middleBranch.getWidth(null) / 2,
+                        panelHeight - 200 - i * middleBranch.getHeight(null),
+                        null
+                );
+            else if(tree.get(i).getValue2())
+                g2d.drawImage(
+                        rightBranch,
+                        panelWidth / 2 - middleBranch.getWidth(null) / 2,
+                        panelHeight - 200 - i * middleBranch.getHeight(null),
+                        null
+                );
 
-    private void drawBranch(JLabel label, int col, int row, boolean reverse){
-        ImageIcon icon;
-
-        if(reverse)
-            icon = new ImageIcon(rightBranch);
-        else
-            icon = new ImageIcon(leftBranch);
-
-        label.setIcon(icon);
-        label.setLocation(panelWidth / 2 - icon.getIconWidth() / 2, panelHeight - 200 - row * icon.getIconHeight());
-        label.setSize(icon.getIconWidth(), icon.getIconHeight());
+        }
     }
 }

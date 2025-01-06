@@ -18,9 +18,7 @@ public class GameUISwing implements GameUI{
     private final JPanel mainPanel;
     private final List<JComponent> components;
 
-    private final JPanel boardPanel;
     private final JPanel menuPanel;
-    private final JPanel timbermanPanel;
     private final JPanel scorePanel;
     private final JPanel timerPanel;
     private final JPanel gameOverPanel;
@@ -52,9 +50,7 @@ public class GameUISwing implements GameUI{
         scoreboardView = new ScoreboardView();
         colorMenuView = new ColorMenuView();
 
-        boardPanel = initialPanel();
         menuPanel = initialPanel();
-        timbermanPanel = initialPanel();
         scorePanel = initialPanel();
         gameOverPanel = initialPanel();
         timerPanel = initialPanel();
@@ -105,14 +101,14 @@ public class GameUISwing implements GameUI{
 
     @Override
     public void drawBoard(Board board) {
-        boardView.draw(boardPanel, board);
-        components.add(boardPanel);
+        boardView.draw(board);
+        components.add(boardView);
     }
 
     @Override
     public void drawTimberman(Timberman timberman) {
-        timbermanView.draw(timbermanPanel, timberman);
-        components.add(timbermanPanel);
+        timbermanView.draw(timberman);
+        components.add(timbermanView);
     }
 
     @Override

@@ -3,30 +3,88 @@ package org.mafisher.view;
 import org.mafisher.model.Timberman;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TimbermanView {
+public class TimbermanView extends JPanel implements ActionListener {
 
-    private final ImageIcon timbermanIcon;
-    private final JLabel label;
+    private final Image timberman_right;
+    private final Image timberman_left;
+    private final Image timberman_right_animation;
+    private final Image timberman_left_animation;
+    private Image curentImage;
+
+    private final Timer timer;
+
+    private boolean side;
+
+    private final int panelWidth;
+    private final int panelHeight;
 
     public TimbermanView() {
-        timbermanIcon = new ImageIcon(getClass().getResource("/view/timberman/amongus.png"));
-        label = new JLabel(timbermanIcon);
+
+        this.setSize(800, 800);
+        this.setLayout(null);
+        this.setOpaque(false);
+
+        timberman_right = new ImageIcon(getClass().getResource("/view/timberman/timberman_right.png")).getImage();
+        timberman_left = new ImageIcon(getClass().getResource("/view/timberman/timberman_left.png")).getImage();
+        timberman_right_animation = new ImageIcon(getClass().getResource("/view/timberman/timberman_right_animation.png")).getImage();
+        timberman_left_animation = new ImageIcon(getClass().getResource("/view/timberman/timberman_left_animation.png")).getImage();
+
+        panelWidth = this.getWidth();
+        panelHeight = this.getHeight();
+
+        timer = new Timer(200, this);
+
     }
 
-    public void draw(JPanel panel, Timberman timberman){
-        panel.remove(label);
-        double panelWidth = panel.getSize().getWidth();
-        double panelHeight = panel.getSize().getHeight();
+    public void draw(Timberman timberman){
         boolean side = timberman.getSide();
-        label.setSize(timbermanIcon.getIconWidth(), timbermanIcon.getIconHeight());
         if(side){
-            label.setLocation((int)(panelWidth / 2 - (double) timbermanIcon.getIconWidth() / 2 - 60), (int) (panelHeight - 200));
+            this.side = true;
+            if(timberman.getAnimation())
+                curentImage = timberman_left_animation;
         }
         else{
-            label.setLocation((int)(panelWidth / 2 - (double) timbermanIcon.getIconWidth() / 2 + 60), (int) (panelHeight - 200));
+            this.side = false;
+            if(timberman.getAnimation())
+                curentImage = timberman_right_animation;
         }
+        timberman.setAnimation(false);
+        revalidate();
+        repaint();
+        timer.start();
+    }
 
-        panel.add(label);
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        int x = (int)(panelWidth / 2.0 - (double) timberman_left.getWidth(null) / 2);
+        int y = panelHeight - 200;
+
+        if(side){
+            g2d.drawImage(curentImage, x - 50, y, null);
+            timer.start();
+        }else{
+            g2d.drawImage(curentImage, x + 50, y, null);
+            timer.start();
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if(side)
+            curentImage = timberman_left;
+        else
+            curentImage = timberman_right;
+
+        revalidate();
+        repaint();
+        timer.stop();
+        timer.restart();
     }
 }
