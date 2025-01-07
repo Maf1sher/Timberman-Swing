@@ -84,6 +84,7 @@ public class GameUISwing implements GameUI{
     @Override
     public void close() {
         frame.dispose();
+        System.exit(0);
     }
 
     @Override
