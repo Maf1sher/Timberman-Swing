@@ -51,8 +51,8 @@ public class MenuController {
     }
 
     private void repaint(){
-        gameUI.drawBackground();
         gameUI.drawMenu(selectedOption);
+        gameUI.drawBackground();
         gameUI.update();
     }
 

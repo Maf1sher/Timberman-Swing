@@ -17,8 +17,8 @@ public class TimbermanColorController {
     public void changeTimbermanColor(GameUI gameUI, GameController gameController) {
         int selectedColorIndex = 0;
         while (true) {
-            gameUI.drawBackground();
             gameUI.drawColorMenu(selectedColorIndex, colors);
+            gameUI.drawBackground();
             gameUI.update();
 
             try {

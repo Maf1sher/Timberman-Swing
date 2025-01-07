@@ -12,6 +12,7 @@ public class BoardView extends JPanel{
     private final Image leftBranch;
     private final Image rightBranch;
     private final Image middleBranch;
+    private final Image trunk;
 
     private List<TupleBoolean> tree;
 
@@ -23,6 +24,7 @@ public class BoardView extends JPanel{
         leftBranch = new ImageIcon(this.getClass().getResource("/view/tree/left-branch.png")).getImage();
         rightBranch = new ImageIcon(this.getClass().getResource("/view/tree/right-branch.png")).getImage();
         middleBranch = new ImageIcon(this.getClass().getResource("/view/tree/middle-branch.png")).getImage();
+        trunk = new ImageIcon(this.getClass().getResource("/view/tree/trunk.png")).getImage();
     }
 
     public void draw(Board board){
@@ -61,5 +63,11 @@ public class BoardView extends JPanel{
                 );
 
         }
+        g2d.drawImage(
+                trunk,
+                panelWidth / 2 - middleBranch.getWidth(null) / 2,
+                panelHeight - 200 + middleBranch.getHeight(null),
+                null
+                );
     }
 }

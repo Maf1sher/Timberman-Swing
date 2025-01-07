@@ -22,8 +22,8 @@ public class ScoreBoardController {
     }
 
     public void showScoreBoard(GameUI gameUI) {
-        gameUI.drawBackground();
         gameUI.drawScoreboard(scoreBoard.stream().limit(10).collect(Collectors.toList()));
+        gameUI.drawBackground();
         gameUI.update();
         while (!KeyController.isEnternProcessed());
     }

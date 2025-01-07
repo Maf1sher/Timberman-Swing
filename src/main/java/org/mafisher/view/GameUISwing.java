@@ -28,6 +28,7 @@ public class GameUISwing implements GameUI{
     private final TimerView timerView;
     private final ScoreboardView scoreboardView;
     private final ColorMenuView colorMenuView;
+    private final BackgroundView backgroundView;
 
     public GameUISwing(){
         mainPanel = new JPanel();
@@ -41,6 +42,7 @@ public class GameUISwing implements GameUI{
         gameOverView = new GameOverView();
         scoreboardView = new ScoreboardView();
         colorMenuView = new ColorMenuView();
+        backgroundView = new BackgroundView();
 
         initialView(timbermanView);
         initialView(boardView);
@@ -50,6 +52,7 @@ public class GameUISwing implements GameUI{
         initialView(timerView);
         initialView(scoreboardView);
         initialView(colorMenuView);
+        initialView(backgroundView);
     }
 
     @Override
@@ -91,7 +94,8 @@ public class GameUISwing implements GameUI{
 
     @Override
     public void drawBackground() {
-        mainPanel.setBackground(Color.green);
+        backgroundView.draw();
+        components.add(backgroundView);
     }
 
     @Override
