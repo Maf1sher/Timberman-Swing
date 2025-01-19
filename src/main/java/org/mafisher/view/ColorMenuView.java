@@ -59,6 +59,26 @@ public class ColorMenuView extends JPanel{
 
             colorPanel.setBounds(colorStartX + (i + 1) * (colorWidth + spacing), colorY, colorWidth, colorHeight);
             this.add(colorPanel);
+
+            if (i == -1) {
+                JLabel leftArrow = new JLabel("<", SwingConstants.CENTER);
+                leftArrow.setFont(new Font("Arial", Font.BOLD, 24));
+                leftArrow.setBounds(colorStartX + i * (colorWidth + spacing) + 15, colorY + 5, 40, 40);
+                leftArrow.setOpaque(true);
+                leftArrow.setBackground(Color.WHITE);
+                leftArrow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+                this.add(leftArrow);
+            }
+
+            if (i == 1) {
+                JLabel rightArrow = new JLabel(">", SwingConstants.CENTER);
+                rightArrow.setFont(new Font("Arial", Font.BOLD, 24));
+                rightArrow.setBounds(colorStartX + (i + 1) * (colorWidth + spacing) + colorWidth + 5, colorY + 5, 40, 40);
+                rightArrow.setOpaque(true);
+                rightArrow.setBackground(Color.WHITE);
+                rightArrow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+                this.add(rightArrow);
+            }
         }
 
         this.add(background);
