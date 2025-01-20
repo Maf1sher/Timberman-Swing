@@ -12,10 +12,14 @@ public class ColorMenuView extends JPanel{
     private final ImageIcon background_image;
     private final JLabel timberman;
     private ImageIcon timberman_image;
+    private final ImageIcon arrow;
+    private final JLabel arrow_image;
 
     public ColorMenuView() {
+        this.arrow = new ImageIcon(getClass().getResource("/view/colormenu/menu_arrow.png"));
         this.background_image = new ImageIcon(getClass().getResource("/view/colormenu/colormenu.png"));
         this.background = new JLabel(background_image);
+        this.arrow_image = new JLabel(arrow);
         this.timberman = new JLabel();
     }
 
@@ -37,6 +41,14 @@ public class ColorMenuView extends JPanel{
         int timbermanY = y - timberman_image.getIconHeight() + 150;
         timberman.setLocation(timbermanX, timbermanY);
         timberman.setSize(timberman_image.getIconWidth(), timberman_image.getIconHeight());
+
+        arrow_image.setLocation(
+                this.getWidth() / 2 - arrow.getIconWidth() / 2,
+                500
+                );
+        arrow_image.setSize(arrow.getIconWidth(), arrow.getIconHeight());
+
+        this.add(arrow_image);
 
         int colorY = y + background_image.getIconHeight() - 150;
         int colorWidth = 50;
